@@ -8,14 +8,14 @@
  * @author		Boots Highland
  * @link		http://www.groupswitch.com/
  * @copyright	Copyright (c) 2012, Boots Highland
- * 
+ *
  * Thanks to Ingmar Greil in the EE forums for pointing me in the right direction.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -24,7 +24,7 @@
 
 $plugin_info = array(
   'pi_name'         => 'Jewish Calendar Conversion',
-  'pi_version'      => '1.0',
+  'pi_version'      => '1.1',
   'pi_author'       => 'Boots Highland',
   'pi_author_url'   => 'http://www.groupswitch.com/',
   'pi_description'  => 'Takes a Gregorian/Civil Calendar date and returns the corresponding Jewish/Hebrew Calendar date.',
@@ -50,21 +50,21 @@ class Jewish_cal_conv {
 
         $date_in = $this->EE->TMPL->fetch_param('date');
         $date_fmt = date('m-d-Y', $date_in);
-        
-        $gregorian_date = explode("-", $date_fmt); 
-		$julian_date = gregoriantojd($gregorian_date[0],$gregorian_date[1],$gregorian_date[2]); 
-		$hebrew_date = jdtojewish($julian_date); 
-		$hebrew_month_name = jdmonthname($julian_date,4); 
-		
-		list($hebrew_month, $hebrew_day, $hebrew_year) = explode('/',$hebrew_date); 
-        
+
+        $gregorian_date = explode("-", $date_fmt);
+		$julian_date = gregoriantojd($gregorian_date[0],$gregorian_date[1],$gregorian_date[2]);
+		$hebrew_date = jdtojewish($julian_date);
+		$hebrew_month_name = jdmonthname($julian_date,4);
+
+		list($hebrew_month, $hebrew_day, $hebrew_year) = explode('/',$hebrew_date);
+
         $vars = array(
-                'month' => $hebrew_month,
-                'month_name' => $hebrew_month_name,
-                'day' => $hebrew_day,
-                'year' => $hebrew_year
+                'hebrew_month' => $hebrew_month,
+                'hebrew_month_name' => $hebrew_month_name,
+                'hebrew_day' => $hebrew_day,
+                'hebrew_year' => $hebrew_year
                 );
-        
+
         $output = $this->EE->TMPL->parse_variables_row($this->EE->TMPL->tagdata, $vars);
         $this->return_data = $output;
     }
@@ -84,22 +84,22 @@ class Jewish_cal_conv {
 Examples:
 // The following will output "Month DD, YYYY":
 {exp:jewish_cal_conv date="{current_time}"}
-{month_name} {day}, {year}
+{hebrew_month_name} {hebrew_day}, {hebrew_year}
 {/exp:jewish_cal_conv}
 
 // The following will output "MM/DD/YYYY":
 {exp:jewish_cal_conv date="{entry_date}"}
-{month}/{day}/{year}
+{hebrew_month}/{hebrew_day}/{hebrew_year}
 {/exp:jewish_cal_conv}
 
 Required parameter:
 "date" - A UNIX timestamp
 
 Available variables:
-{month} - Numeric representation of the month
-{month_name} - A full textual representation of the month
-{day} - Numeric representation of the day
-{year} - Numeric representation of the year
+{hebrew_month} - Numeric representation of the month
+{hebrew_month_name} - A full textual representation of the month
+{hebrew_day} - Numeric representation of the day
+{hebrew_year} - Numeric representation of the year
     <?php
         $buffer = ob_get_contents();
         ob_end_clean();
