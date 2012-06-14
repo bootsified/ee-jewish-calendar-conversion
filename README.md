@@ -5,14 +5,14 @@ ExpressionEngine plugin to convert a Gregorian/Civil calendar date to Jewish/Heb
 
 **Examples:**  
 *// The following will output "Month DD, YYYY":*  
-    {exp:jewish_cal_conv date="{current_time}"}
-    {hebrew_month_name} {hebrew_day}, {hebrew_year}
-    {/exp:jewish_cal_conv}
+    {exp:jewish_cal_conv date="{current_time}"}  
+    {hebrew_month_name} {hebrew_day}, {hebrew_year}  
+    {/exp:jewish_cal_conv}  
 
 *// The following will output "MM/DD/YYYY":*  
-    {exp:jewish_cal_conv date="{entry_date}"}
-    {hebrew_month}/{hebrew_day}/{hebrew_year}
-    {/exp:jewish_cal_conv}
+    {exp:jewish_cal_conv date="{entry_date}"}  
+    {hebrew_month}/{hebrew_day}/{hebrew_year}  
+    {/exp:jewish_cal_conv}  
 
 **Required parameter:**  
 "date" - A UNIX timestamp
